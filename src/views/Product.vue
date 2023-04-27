@@ -84,11 +84,12 @@ function LoadingFinish() {
 onMounted(async () => {
   let result = await getProducts()
   console.log(result)
-  state.isLoading = false
+  // state.isLoading = false
   state.products = result.list
   state.scenes = result.hdr
   state.base3d = new Base3d('#product', LoadingFinish)
   state.base3d.onProgress((e) => {
+    console.log(e)
     let progressNum = e.loaded / e.total
     progressNum = progressNum.toFixed(2) * 100
     state.progress = progressNum

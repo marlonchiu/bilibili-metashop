@@ -1,6 +1,7 @@
 # bilibili-metashop
 
 > [2022 全新 Vue3+threejs 打造沉浸式商城企业项目实战](https://www.bilibili.com/video/BV15T4y1175F)
+> [https://loading.io/](https://loading.io/)
 
 ## 技术栈
 
