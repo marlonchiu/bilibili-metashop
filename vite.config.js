@@ -9,7 +9,14 @@ import ViteComponents, { AntDesignVueResolver } from 'unplugin-vue-components/re
 export default defineConfig({
   server: {
     open: true,
-    port: 3000
+    port: 3000,
+    proxy: {
+      '/api': {
+        target: 'http://api.cpengx.cn/metashop/api',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
   },
   resolve: {
     alias: {

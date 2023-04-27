@@ -3,17 +3,37 @@ import { createStore } from 'vuex'
 const store = createStore({
   state() {
     return {
-      count: 0
+      count: 0,
+      isFullscreen: false,
+      buyCartList: []
     }
   },
   mutations: {
     increment(state, payload) {
       state.count += payload
+    },
+    setFullscreen(state, payload) {
+      state.isFullscreen = payload
+    },
+    addBuyCarts(state, payload) {
+      state.buyCartList.push(payload)
+    },
+    addBuyCartsNum(state, payload) {
+      state.buyCartList[payload].num++
+    },
+    minusBuyCartsNum(state, payload) {
+      state.buyCartList[payload].num--
+      if (state.buyCartList[payload].num == 0) {
+        state.buyCartList.splice(payload, 1)
+      }
     }
   },
   getters: {
     totalPrice(state) {
-      return state.count * 98.8
+      let total = state.buyCartList.reduce((pre, item) => {
+        return pre + item.price * item.num
+      }, 0)
+      return total
     }
   },
   actions: {

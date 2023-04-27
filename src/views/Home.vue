@@ -3,7 +3,7 @@
  * @Author: marlonchiu
  * @Date: 2023-03-10 12:05:04
  * @LastEditors: marlonchiu
- * @LastEditTime: 2023-04-21 22:28:55
+ * @LastEditTime: 2023-04-25 21:12:10
 -->
 <template>
   <suspense>
@@ -22,7 +22,7 @@
 
 <script setup>
 import { onMounted, defineAsyncComponent } from 'vue'
-import { getHomepage } from '@/api/index'
+// import { getHomepage } from '@/api/index'
 import Loading from '../components/Loading.vue'
 const HomeAsync = defineAsyncComponent(() => import('../components/HomeCom.vue'))
 

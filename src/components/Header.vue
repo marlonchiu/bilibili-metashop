@@ -1,10 +1,15 @@
 <template>
-  <div class="header">
+  <div class="header" :class="{ hidden: store.state.isFullscreen }">
     <div class="logo" @click="router.push('/')">
       <img src="@/assets/img/logo_rect.jpg" alt="logo" />
     </div>
-    <a-input-search v-model:value="data.value" placeholder="搜索商品或商品号" class="input-search" @search="onSearch" />
-    <a-menu v-model:selectedKeys="data.current" mode="horizontal">
+    <a-input-search
+      v-model:value="state.value"
+      placeholder="搜索商品或商品号"
+      class="input-search"
+      @search="onSearch"
+    />
+    <a-menu v-model:selectedKeys="state.current" mode="horizontal">
       <a-menu-item key="help">
         <template #icon>
           <question-circle-outlined />
@@ -29,7 +34,7 @@
         </template>
         <template #title>购物车</template>
         <a-menu-item-group title="购物商品">
-          <a-menu-item v-for="(item, i) in store.state.buycarts" :key="item.id">
+          <a-menu-item v-for="(item, i) in store.state.buyCartList" :key="item.id">
             <div class="prod-item">
               <div class="left">
                 <img :src="item.imgsrc" :alt="item.title" />
@@ -39,8 +44,8 @@
                 <div class="content">
                   <span class="num">数量：{{ item.num }}</span>
                   <div class="control">
-                    <span class="btn" @click.stop="store.commit('addBuycartsNum', i)">+</span>
-                    <span class="btn" @click.stop="store.commit('minusBuycartsNum', i)">-</span>
+                    <span class="btn" @click.stop="store.commit('addBuyCartsNum', i)">+</span>
+                    <span class="btn" @click.stop="store.commit('minusBuyCartsNum', i)">-</span>
                   </div>
                 </div>
               </div>
@@ -66,9 +71,11 @@ import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { reactive } from 'vue'
 import { ShopOutlined, UserOutlined, CarOutlined, QuestionCircleOutlined } from '@ant-design/icons-vue'
+
 const store = useStore()
 const router = useRouter()
-const data = reactive({
+
+const state = reactive({
   value: '',
   current: ['help']
 })
